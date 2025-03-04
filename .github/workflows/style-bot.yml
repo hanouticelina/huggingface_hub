@@ -13,7 +13,7 @@ jobs:
     uses: ./.github/workflows/style-bot-action.yml
     with:
       python_quality_dependencies: "[quality]"
-      pre_commit_script_name: "Check if the files are up to date"
+      pre_commit_script_name: "Download and Compare files from the main branch"
       pre_commit_script: |
         curl -o main_Makefile https://raw.githubusercontent.com/huggingface/huggingface_hub/main/Makefile
         curl -o main_setup.py https://raw.githubusercontent.com/huggingface/huggingface_hub/main/setup.py
@@ -23,6 +23,7 @@ jobs:
           echo "Error: The Makefile has changed. Please ensure it matches the main branch."
           diff_failed=1
         fi
+
         if ! diff -q main_setup.py setup.py; then
           echo "Error: The setup.py has changed. Please ensure it matches the main branch."
           diff_failed=1
@@ -33,6 +34,6 @@ jobs:
         fi
         echo "No changes in the files. Proceeding..."
         rm -rf main_Makefile main_setup.py
-      style_command: "make style"
+      style_command: "make style && make quality"
     secrets:
       bot_token: ${{ secrets.GITHUB_TOKEN }}
