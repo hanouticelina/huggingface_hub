@@ -13,6 +13,7 @@ jobs:
     uses: ./.github/workflows/style-bot-action.yml
     with:
       python_quality_dependencies: "[quality]"
+      pre_commit_script_name: "Check if the files are up to date"
       pre_commit_script: |
         curl -o main_Makefile https://raw.githubusercontent.com/huggingface/huggingface_hub/main/Makefile
         curl -o main_setup.py https://raw.githubusercontent.com/huggingface/huggingface_hub/main/setup.py
