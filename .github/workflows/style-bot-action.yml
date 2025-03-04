@@ -98,15 +98,19 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install .${{ inputs.python_quality_dependencies }}
-
+      - name: Debug Inputs
+        run: |
+          echo "style_command: ${{ inputs.style_command }}"
+          echo "pre_commit_script: ${{ inputs.pre_commit_script }}"
       - name: Custom pre-commit script
         if: inputs.pre_commit_script != ''
         run: |
-          ${inputs.pre_commit_script}
+          ${{ inputs.pre_commit_script }}
 
       - name: Run make style and make quality
+        shell: bash
         run: |
-          ${inputs.style_command}
+          ${{ inputs.style_command }}
 
       - name: Commit and push changes
         id: commit_and_push
