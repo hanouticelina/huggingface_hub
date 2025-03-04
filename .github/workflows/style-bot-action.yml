@@ -112,8 +112,11 @@ jobs:
         env:
           pre_commit_script: ${{ inputs.pre_commit_script }}
         if: inputs.pre_commit_script != ''
+        shell: bash
         run: |
-          $pre_commit_script
+          echo "$pre_commit_script" > pre_commit_script.sh
+          chmod +x pre_commit_script.sh
+          ./pre_commit_script.sh
 
       - name: Run make style and make quality
         env:
