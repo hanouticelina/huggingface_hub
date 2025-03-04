@@ -108,6 +108,7 @@ jobs:
           ${{ inputs.pre_commit_script }}
 
       - name: Run make style and make quality
+        shell: bash
         run: |
           ${{ inputs.style_command }}
 
