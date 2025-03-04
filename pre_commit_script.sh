@@ -6,6 +6,7 @@ if ! diff -q main_Makefile Makefile; then
   echo "Error: The Makefile has changed. Please ensure it matches the main branch."
   diff_failed=1
 fi
+
 if ! diff -q main_setup.py setup.py; then
   echo "Error: The setup.py has changed. Please ensure it matches the main branch."
   diff_failed=1
